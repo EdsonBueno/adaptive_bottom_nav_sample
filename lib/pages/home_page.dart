@@ -1,5 +1,5 @@
 import 'package:adaptive_bottom_nav_sample/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/pages/dummy_page.dart';
+import 'package:adaptive_bottom_nav_sample/pages/indexed_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,8 +27,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final currentFlow = appFlows[_currentBarIndex];
     return Scaffold(
-      body: DummyPage(
-        title: currentFlow.title,
+      body: IndexedPage(
+        index: 1,
+        containingFlowTitle: currentFlow.title,
         backgroundColor: currentFlow.mainColor,
       ),
       bottomNavigationBar: BottomNavigationBar(
