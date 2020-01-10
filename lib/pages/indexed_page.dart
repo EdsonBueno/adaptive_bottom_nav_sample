@@ -43,7 +43,7 @@ class IndexedPage extends StatelessWidget {
               ),
             );
           },
-          child: const Text('Next Page'),
+          child: const Text('NEXT PAGE'),
         ),
       ),
     );
