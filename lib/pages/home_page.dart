@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
         body: Navigator(
           key: currentFlow.navigatorKey,
           onGenerateRoute: (settings) => MaterialPageRoute(
+            settings: settings,
             builder: (context) => IndexedPage(
               index: 1,
               containingFlowTitle: currentFlow.title,
