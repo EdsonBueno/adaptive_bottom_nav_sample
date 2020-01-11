@@ -5,6 +5,7 @@ class AppFlow {
     @required this.title,
     @required this.mainColor,
     @required this.iconData,
+    @required this.navigatorKey,
   })  : assert(title != null),
         assert(mainColor != null),
         assert(iconData != null);
@@ -12,4 +13,5 @@ class AppFlow {
   final String title;
   final Color mainColor;
   final IconData iconData;
+  final GlobalKey<NavigatorState> navigatorKey;
 }
