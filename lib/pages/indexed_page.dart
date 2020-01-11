@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -30,20 +32,47 @@ class IndexedPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => IndexedPage(
-                  index: index + 1,
-                  backgroundColor: Colors.amberAccent,
-                  containingFlowTitle: containingFlowTitle,
-                ),
-              ),
-            );
-          },
-          child: const Text('NEXT PAGE'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Horizontally pushes a new screen.
+            RaisedButton(
+              onPressed: () {
+                _pushPage(context, true);
+              },
+              child: const Text('NEXT PAGE (HORIZONTALLY)'),
+            ),
+
+            // Vertically pushes a new screen / Starts a new flow.
+            // In a real world scenario, this could be an authentication flow
+            // where the user can choose to sign in or sign up.
+            RaisedButton(
+              onPressed: () {
+                _pushPage(context, false);
+              },
+              child: const Text('NEXT FLOW (VERTICALLY)'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _pushPage(BuildContext context, bool isHorizontalNavigation) {
+    // If it's not a horizontal navigation,
+    // we should use the rootNavigator.
+    Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
+      MaterialPageRoute(
+        builder: (context) => IndexedPage(
+          // If it's a new flow, the displayed index should be 1 again.
+          index: isHorizontalNavigation ? index + 1 : 1,
+          // If it's a new flow, let's randomize it's color.
+          backgroundColor: isHorizontalNavigation
+              ? backgroundColor
+              : Colors.primaries[Random().nextInt(Colors.primaries.length)],
+          // If it's a new flow, let's just call it 'New.'
+          containingFlowTitle:
+              isHorizontalNavigation ? containingFlowTitle : 'New',
         ),
       ),
     );
