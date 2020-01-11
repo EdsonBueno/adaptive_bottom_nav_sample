@@ -1,5 +1,5 @@
 import 'package:adaptive_bottom_nav_sample/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/pages/indexed_page.dart';
+import 'package:adaptive_bottom_nav_sample/pages/indexed_page_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -37,26 +37,12 @@ class _HomePageState extends State<HomePage> {
       onWillPop: () async =>
           !await currentFlow.navigatorKey.currentState.maybePop(),
       child: Scaffold(
-        body: Navigator(
-          // The key in necessary for two reasons:
-          // 1 - For the framework to understand that we're replacing the
-          // navigator even though it's type and location in the tree is
-          // the same. For this isolate purpose a simple ValueKey would fit.
-          // 2 - Being able to access the Navigator's state inside the onWillPop
-          // callback and for emptying it's stack when a tab is re-selected.
-          // That is why a GlobalKey is needed instead of a simple ValueKey.
-          key: currentFlow.navigatorKey,
-          // Since this isn't the purpose of this sample, we're not using named
-          // routes, because of that the onGenerateRoute callback will be
-          // called only for the initial route.
-          onGenerateRoute: (settings) => MaterialPageRoute(
-            settings: settings,
-            builder: (context) => IndexedPage(
-              index: 1,
-              containingFlowTitle: currentFlow.title,
-              backgroundColor: currentFlow.mainColor,
-            ),
-          ),
+        body: IndexedStack(
+          index: _currentBarIndex,
+          children: [
+            IndexedPageFlow(flow: appFlows[0]),
+            IndexedPageFlow(flow: appFlows[1])
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentBarIndex,
