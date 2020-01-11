@@ -9,7 +9,8 @@ class AppFlow {
     @required this.navigatorKey,
   })  : assert(title != null),
         assert(mainColor != null),
-        assert(iconData != null);
+        assert(iconData != null),
+        assert(navigatorKey != null);
 
   final String title;
   final Color mainColor;
