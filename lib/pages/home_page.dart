@@ -12,40 +12,55 @@ class _HomePageState extends State<HomePage> {
   int _currentBarIndex = 0;
   final List<AppFlow> appFlows = [
     AppFlow(
-      title: 'Video',
-      iconData: Icons.ondemand_video,
-      mainColor: Colors.red,
-    ),
+        title: 'Video',
+        iconData: Icons.ondemand_video,
+        mainColor: Colors.red,
+        navigatorKey: GlobalKey()),
     AppFlow(
-      title: 'Music',
-      iconData: Icons.music_note,
-      mainColor: Colors.green,
-    )
+        title: 'Music',
+        iconData: Icons.music_note,
+        mainColor: Colors.green,
+        navigatorKey: GlobalKey())
   ];
 
   @override
   Widget build(BuildContext context) {
     final currentFlow = appFlows[_currentBarIndex];
-    return Scaffold(
-      body: IndexedPage(
-        index: 1,
-        containingFlowTitle: currentFlow.title,
-        backgroundColor: currentFlow.mainColor,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentBarIndex,
-        items: appFlows
-            .map(
-              (flow) => BottomNavigationBarItem(
-                title: Text(flow.title),
-                icon: Icon(flow.iconData),
-              ),
-            )
-            .toList(),
-        onTap: (newIndex) => setState(
-          () {
-            _currentBarIndex = newIndex;
-          },
+
+    return WillPopScope(
+      onWillPop: () async =>
+          !await currentFlow.navigatorKey.currentState.maybePop(),
+      child: Scaffold(
+        body: Navigator(
+          key: currentFlow.navigatorKey,
+          onGenerateRoute: (settings) => MaterialPageRoute(
+            builder: (context) => IndexedPage(
+              index: 1,
+              containingFlowTitle: currentFlow.title,
+              backgroundColor: currentFlow.mainColor,
+            ),
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _currentBarIndex,
+          items: appFlows
+              .map(
+                (flow) => BottomNavigationBarItem(
+                  title: Text(flow.title),
+                  icon: Icon(flow.iconData),
+                ),
+              )
+              .toList(),
+          onTap: (newIndex) => setState(
+            () {
+              if (_currentBarIndex != newIndex) {
+                _currentBarIndex = newIndex;
+              } else {
+                currentFlow.navigatorKey.currentState
+                    .popUntil((route) => route.isFirst);
+              }
+            },
+          ),
         ),
       ),
     );
