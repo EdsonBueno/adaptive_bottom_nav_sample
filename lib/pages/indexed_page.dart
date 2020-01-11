@@ -70,11 +70,11 @@ class IndexedPage extends StatelessWidget {
         builder: (context) => IndexedPage(
           // If it's a new flow, the displayed index should be 1 again.
           index: isHorizontalNavigation ? index + 1 : 1,
-          // If it's a new flow, let's randomize it's color.
+          // If it's a new flow, we'll randomize it's color.
           backgroundColor: isHorizontalNavigation
               ? backgroundColor
               : Colors.primaries[Random().nextInt(Colors.primaries.length)],
-          // If it's a new flow, let's just call it 'New.'
+          // If it's stating a new flow let's just call it 'New.'
           containingFlowTitle:
               isHorizontalNavigation ? containingFlowTitle : 'New',
         ),

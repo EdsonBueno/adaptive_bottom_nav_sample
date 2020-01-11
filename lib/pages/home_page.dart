@@ -12,15 +12,17 @@ class _HomePageState extends State<HomePage> {
   int _currentBarIndex = 0;
   final List<AppFlow> appFlows = [
     AppFlow(
-        title: 'Video',
-        iconData: Icons.ondemand_video,
-        mainColor: Colors.red,
-        navigatorKey: GlobalKey()),
+      title: 'Video',
+      iconData: Icons.ondemand_video,
+      mainColor: Colors.red,
+      navigatorKey: GlobalKey(),
+    ),
     AppFlow(
-        title: 'Music',
-        iconData: Icons.music_note,
-        mainColor: Colors.green,
-        navigatorKey: GlobalKey())
+      title: 'Music',
+      iconData: Icons.music_note,
+      mainColor: Colors.green,
+      navigatorKey: GlobalKey(),
+    )
   ];
 
   @override
@@ -28,6 +30,9 @@ class _HomePageState extends State<HomePage> {
     final currentFlow = appFlows[_currentBarIndex];
 
     return WillPopScope(
+      // We're preventing the root navigator from popping and closing the
+      // app if the inner navigator can handle it, which occurs when it has
+      // more than one screen on it's stack.
       onWillPop: () async =>
           !await currentFlow.navigatorKey.currentState.maybePop(),
       child: Scaffold(
@@ -56,6 +61,8 @@ class _HomePageState extends State<HomePage> {
               if (_currentBarIndex != newIndex) {
                 _currentBarIndex = newIndex;
               } else {
+                // If the user is re-selecting the tab, the common
+                // behavior is to empty the stack.
                 currentFlow.navigatorKey.currentState
                     .popUntil((route) => route.isFirst);
               }
