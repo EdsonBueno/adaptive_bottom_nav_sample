@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+// Page that displays it's index, flow's title and color.
+// Has a button for pushing another one of it's kind with an incremented index.
 class IndexedPage extends StatelessWidget {
   const IndexedPage({
     @required this.index,
