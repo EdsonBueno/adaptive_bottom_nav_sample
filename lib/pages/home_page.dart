@@ -1,5 +1,5 @@
 import 'package:adaptive_bottom_nav_sample/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/pages/indexed_page_flow.dart';
+import 'package:adaptive_bottom_nav_sample/indexed_page_flow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
