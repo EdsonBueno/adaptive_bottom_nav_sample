@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -66,7 +68,7 @@ class IndexedPage extends StatelessWidget {
     // If it's not a horizontal navigation,
     // we should use the rootNavigator.
     Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
-      MaterialPageRoute(
+      _buildAdaptivePageRoute(
         builder: (context) => IndexedPage(
           // If it's a new flow, the displayed index should be 1 again.
           index: isHorizontalNavigation ? index + 1 : 1,
@@ -78,8 +80,16 @@ class IndexedPage extends StatelessWidget {
           containingFlowTitle:
               isHorizontalNavigation ? containingFlowTitle : 'New',
         ),
-        fullscreenDialog: !isHorizontalNavigation,
+        fullScreenDialog: !isHorizontalNavigation,
       ),
     );
   }
+
+  PageRoute<T> _buildAdaptivePageRoute<T>(
+          {@required WidgetBuilder builder, bool fullScreenDialog = false}) =>
+      Platform.isAndroid
+          ? MaterialPageRoute(
+              builder: builder, fullscreenDialog: fullScreenDialog)
+          : CupertinoPageRoute(
+              builder: builder, fullscreenDialog: fullScreenDialog);
 }
