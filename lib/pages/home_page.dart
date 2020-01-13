@@ -71,8 +71,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // The ideal here would be to extract this Navigator creation to another
-  // Widget since it's the best practice. However, as this code won't be here in
+  // The best practice here would be to extract this Navigator creation to
+  // another Widget. However, as this code won't be here in
   // the next section of the post, doing so would only add complexity.
   Widget _buildIndexedPageFlow(AppFlow appFlow) => Navigator(
         // The key enables us to access the Navigator's state inside the
