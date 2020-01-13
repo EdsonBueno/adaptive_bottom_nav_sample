@@ -78,6 +78,7 @@ class IndexedPage extends StatelessWidget {
           containingFlowTitle:
               isHorizontalNavigation ? containingFlowTitle : 'New',
         ),
+        fullscreenDialog: !isHorizontalNavigation,
       ),
     );
   }
