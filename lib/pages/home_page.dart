@@ -1,5 +1,5 @@
 import 'package:adaptive_bottom_nav_sample/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/indexed_page_flow.dart';
+import 'package:adaptive_bottom_nav_sample/pages/indexed_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
         body: IndexedStack(
           index: _currentBarIndex,
           children: [
-            IndexedPageFlow(flow: appFlows[0]),
-            IndexedPageFlow(flow: appFlows[1])
+            _buildIndexedPageFlow(appFlows[0]),
+            _buildIndexedPageFlow(appFlows[1]),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -70,4 +70,26 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  // The ideal here would be to extract this Navigator creation to another
+  // Widget since it's the best practice. However, as this code won't be here in
+  // the next section of the post, doing so would only add complexity.
+  Widget _buildIndexedPageFlow(AppFlow appFlow) => Navigator(
+        // The key enables us to access the Navigator's state inside the
+        // onWillPop callback and for emptying it's stack when a tab is
+        // re-selected. That is why a GlobalKey is needed instead of
+        // a simpler ValueKey.
+        key: appFlow.navigatorKey,
+        // Since this isn't the purpose of this sample, we're not using named
+        // routes, because of that the onGenerateRoute callback will be
+        // called only for the initial route.
+        onGenerateRoute: (settings) => MaterialPageRoute(
+          settings: settings,
+          builder: (context) => IndexedPage(
+            index: 1,
+            containingFlowTitle: appFlow.title,
+            backgroundColor: appFlow.mainColor,
+          ),
+        ),
+      );
 }
