@@ -2,6 +2,8 @@ import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// A Scaffold with a configured BottomNavigationBar, separate
+/// Navigators for each tab view and state retaining across tab switches.
 class MaterialBottomNavigationScaffold extends StatelessWidget {
   const MaterialBottomNavigationScaffold({
     @required this.navigationBarItems,

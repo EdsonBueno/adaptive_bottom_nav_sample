@@ -5,6 +5,8 @@ import 'package:adaptive_bottom_nav_sample/custom/cupertino_bottom_navigation_sc
 import 'package:adaptive_bottom_nav_sample/custom/material_bottom_navigation_scaffold.dart';
 import 'package:flutter/widgets.dart';
 
+/// A platform-aware Scaffold which encapsulates the common behaviour between
+/// material's and cupertino's bottom navigation pattern.
 class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   const AdaptiveBottomNavigationScaffold({
     @required this.navigationBarItems,
@@ -14,7 +16,10 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
         assert(initialPageBuilder != null),
         super(key: key);
 
+  /// List of the tabs to be displayed with their respective navigator's keys.
   final List<BottomNavigationTab> navigationBarItems;
+
+  /// Builds the initial page's widget for the given tab index.
   final Widget Function(int value) initialPageBuilder;
 
   @override
@@ -57,6 +62,7 @@ class _AdaptiveBottomNavigationScaffoldState
         selectedIndex: _currentlySelectedIndex,
       );
 
+  /// Called when a tab selection occurs.
   void onTabSelected(int newIndex) {
     if (_currentlySelectedIndex == newIndex) {
       // If the user is re-selecting the tab, the common
@@ -65,6 +71,8 @@ class _AdaptiveBottomNavigationScaffoldState
           .popUntil((route) => route.isFirst);
     }
 
+    // If we're running on iOS there's no need to rebuild the Widget to reflect
+    // the tab change.
     if (Platform.isAndroid) {
       setState(() {
         _currentlySelectedIndex = newIndex;
