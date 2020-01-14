@@ -15,13 +15,13 @@ class _HomePageState extends State<HomePage> {
       title: 'Video',
       iconData: Icons.ondemand_video,
       mainColor: Colors.red,
-      navigatorKey: GlobalKey(),
+      navigatorKey: GlobalKey<NavigatorState>(),
     ),
     AppFlow(
       title: 'Music',
       iconData: Icons.music_note,
       mainColor: Colors.green,
-      navigatorKey: GlobalKey(),
+      navigatorKey: GlobalKey<NavigatorState>(),
     )
   ];
 
