@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-// Holds information about our app's flows.
+/// Holds information about our app's flows.
 class AppFlow {
   const AppFlow({
     @required this.title,
