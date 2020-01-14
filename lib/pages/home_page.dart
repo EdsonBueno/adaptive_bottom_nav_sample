@@ -1,6 +1,6 @@
 import 'package:adaptive_bottom_nav_sample/custom/adaptive_bottom_navigation_scaffold.dart';
 import 'package:adaptive_bottom_nav_sample/custom/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_bar_item.dart';
+import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_tab.dart';
 import 'package:adaptive_bottom_nav_sample/pages/indexed_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => AdaptiveBottomNavigationScaffold(
         navigationBarItems: appFlows
             .map(
-              (flow) => NavigationBarItem(
+              (flow) => BottomNavigationTab(
                 bottomNavigationBarItem: BottomNavigationBarItem(
                   title: Text(flow.title),
                   icon: Icon(flow.iconData),

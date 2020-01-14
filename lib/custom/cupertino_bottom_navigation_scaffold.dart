@@ -1,4 +1,4 @@
-import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_bar_item.dart';
+import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_tab.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,7 +14,7 @@ class CupertinoBottomNavigationScaffold extends StatelessWidget {
         assert(initialPageBuilder != null),
         super(key: key);
 
-  final List<NavigationBarItem> navigationBarItems;
+  final List<BottomNavigationTab> navigationBarItems;
   final void Function(int value) onItemSelected;
   final Widget Function(int value) initialPageBuilder;
 

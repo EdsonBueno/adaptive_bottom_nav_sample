@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_bar_item.dart';
+import 'package:adaptive_bottom_nav_sample/custom/bottom_navigation_tab.dart';
 import 'package:adaptive_bottom_nav_sample/custom/cupertino_bottom_navigation_scaffold.dart';
 import 'package:adaptive_bottom_nav_sample/custom/material_bottom_navigation_scaffold.dart';
 import 'package:flutter/widgets.dart';
@@ -14,7 +14,7 @@ class AdaptiveBottomNavigationScaffold extends StatefulWidget {
         assert(initialPageBuilder != null),
         super(key: key);
 
-  final List<NavigationBarItem> navigationBarItems;
+  final List<BottomNavigationTab> navigationBarItems;
   final Widget Function(int value) initialPageBuilder;
 
   @override
