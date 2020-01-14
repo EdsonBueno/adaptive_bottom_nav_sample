@@ -48,8 +48,7 @@ class MaterialBottomNavigationScaffold extends StatelessWidget {
       );
 
   /// The best practice here would be to extract this to another Widget.
-  /// However, as we'll change it in the next section of the post,
-  /// doing so would only add complexity.
+  /// However, doing so would only add unnecessary complexity to our tutorial.
   Widget _buildPageFlow(BuildContext context, int tabIndex) {
     final barItem = navigationBarItems[tabIndex];
     return Navigator(
