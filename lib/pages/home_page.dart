@@ -71,9 +71,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // The best practice here would be to extract this Navigator creation to
-  // another Widget. However, as this code won't be here in
-  // the next section of the post, doing so would only add complexity.
+  /// The best practice here would be to extract this to another Widget.
+  /// However, as we'll change it in the next section of the post,
+  /// doing so would only add complexity.
   Widget _buildIndexedPageFlow(AppFlow appFlow) => Navigator(
         // The key enables us to access the Navigator's state inside the
         // onWillPop callback and for emptying it's stack when a tab is
