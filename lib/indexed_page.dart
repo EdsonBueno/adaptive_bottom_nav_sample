@@ -40,7 +40,7 @@ class IndexedPage extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => IndexedPage(
                   index: index + 1,
-                  backgroundColor: Colors.amberAccent,
+                  backgroundColor: backgroundColor,
                   containingFlowTitle: containingFlowTitle,
                 ),
               ),
