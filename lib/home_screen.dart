@@ -6,6 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// Contains our different pages flows and bottom navigation menu for
+/// alternating between them.
+///
+/// It's called Screen — not Page — to avoid confusion, this one displays
+/// Pages inside it.
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
