@@ -1,4 +1,4 @@
-import 'package:adaptive_bottom_nav_sample/pages/home_page.dart';
+import 'package:adaptive_bottom_nav_sample/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -10,6 +10,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomePage(),
+        home: HomeScreen(),
       );
 }

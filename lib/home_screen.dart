@@ -1,14 +1,14 @@
 import 'package:adaptive_bottom_nav_sample/app_flow.dart';
-import 'package:adaptive_bottom_nav_sample/pages/indexed_page.dart';
+import 'package:adaptive_bottom_nav_sample/indexed_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   int _currentBarIndex = 0;
   final List<AppFlow> appFlows = [
     AppFlow(
