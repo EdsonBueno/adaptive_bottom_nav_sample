@@ -76,9 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  /// The best practice here would be to extract this to another Widget.
-  /// However, as we'll change it in the next section of the post,
-  /// doing so would only add complexity.
+  // The best practice here would be to extract this to another Widget,
+  // however, moving it to a separate class would only harm the
+  // readability of the guide
   Widget _buildIndexedPageFlow(AppFlow appFlow) => Navigator(
         // The key enables us to access the Navigator's state inside the
         // onWillPop callback and for emptying it's stack when a tab is
