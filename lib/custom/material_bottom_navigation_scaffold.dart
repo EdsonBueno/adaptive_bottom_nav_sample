@@ -49,8 +49,9 @@ class MaterialBottomNavigationScaffold extends StatelessWidget {
             onTap: onItemSelected),
       );
 
-  /// The best practice here would be to extract this to another Widget.
-  /// However, doing so would only add unnecessary complexity to our tutorial.
+  // The best practice here would be to extract this to another Widget,
+  // however, moving it to a separate class would only harm the
+  // readability of the guide
   Widget _buildPageFlow(BuildContext context, int tabIndex) {
     final barItem = navigationBarItems[tabIndex];
     return Navigator(
