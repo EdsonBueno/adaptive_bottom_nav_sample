@@ -63,10 +63,16 @@ class IndexedPage extends StatelessWidget {
     );
   }
 
-  void _pushPage(BuildContext context, bool isHorizontalNavigation) {
+  void _pushPage(
+    BuildContext context,
+    bool isHorizontalNavigation,
+  ) {
     // If it's not a horizontal navigation,
     // we should use the rootNavigator.
-    Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
+    Navigator.of(
+      context,
+      rootNavigator: !isHorizontalNavigation,
+    ).push(
       MaterialPageRoute(
         builder: (context) => IndexedPage(
           // If it's a new flow, the displayed index should be 1 again.
@@ -79,6 +85,8 @@ class IndexedPage extends StatelessWidget {
           containingFlowTitle:
               isHorizontalNavigation ? containingFlowTitle : 'New',
         ),
+        // Flutter will use the fullscreenDialog property to change the
+        // animation and the app bar's left icon to an X instead of an arrow.
         fullscreenDialog: !isHorizontalNavigation,
       ),
     );
