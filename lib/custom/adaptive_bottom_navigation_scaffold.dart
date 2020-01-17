@@ -33,10 +33,10 @@ class _AdaptiveBottomNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) => WillPopScope(
-        // We're preventing the root navigator from popping and closing the
-        // app if the inner navigator can handle it, which occurs when it has
-        // more than one screen on it's stack. You can comment the onWillPop
-        // callback and watch it happening.
+        // We're preventing the root navigator from popping and closing the app
+        // when the back button is pressed and the inner navigator can handle
+        // it. That occurs when the inner has more than one page on it's stack.
+        // You can comment the onWillPop callback and watch "the bug".
         onWillPop: () async => !await widget
             .navigationBarItems[_currentlySelectedIndex]
             .navigatorKey
