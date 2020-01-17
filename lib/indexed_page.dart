@@ -86,11 +86,19 @@ class IndexedPage extends StatelessWidget {
     );
   }
 
-  PageRoute<T> _buildAdaptivePageRoute<T>(
-          {@required WidgetBuilder builder, bool fullscreenDialog = false}) =>
+  // Flutter will use the fullscreenDialog property to change the animation
+  // and the app bar's left icon to an X instead of an arrow.
+  PageRoute<T> _buildAdaptivePageRoute<T>({
+    @required WidgetBuilder builder,
+    bool fullscreenDialog = false,
+  }) =>
       Platform.isAndroid
           ? MaterialPageRoute(
-              builder: builder, fullscreenDialog: fullscreenDialog)
+              builder: builder,
+              fullscreenDialog: fullscreenDialog,
+            )
           : CupertinoPageRoute(
-              builder: builder, fullscreenDialog: fullscreenDialog);
+              builder: builder,
+              fullscreenDialog: fullscreenDialog,
+            );
 }
