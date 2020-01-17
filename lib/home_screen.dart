@@ -20,13 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'Video',
       iconData: Icons.ondemand_video,
       mainColor: Colors.red,
-      navigatorKey: GlobalKey(),
+      navigatorKey: GlobalKey<NavigatorState>(),
     ),
     AppFlow(
       title: 'Music',
       iconData: Icons.music_note,
       mainColor: Colors.green,
-      navigatorKey: GlobalKey(),
+      navigatorKey: GlobalKey<NavigatorState>(),
     )
   ];
 
@@ -34,10 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final currentFlow = appFlows[_currentBarIndex];
 
-    // We're preventing the root navigator from popping and closing the
-    // app if the inner navigator can handle it, which occurs when it has
-    // more than one screen on it's stack. You can comment the onWillPop
-    // callback and watch it happening.
+    // We're preventing the root navigator from popping and closing the app
+    // when the back button is pressed and the inner navigator can handle it.
+    // That occurs when the inner has more than one page on it's stack.
+    // You can comment the onWillPop callback and watch "the bug".
     return WillPopScope(
       onWillPop: () async =>
           !await currentFlow.navigatorKey.currentState.maybePop(),
