@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // We're preventing the root navigator from popping and closing the app
     // when the back button is pressed and the inner navigator can handle it.
-    // That occurs when the inner has more than one page on it's stack.
+    // That occurs when the inner has more than one page on its stack.
     // You can comment the onWillPop callback and watch "the bug".
     return WillPopScope(
       onWillPop: () async =>
@@ -45,10 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Navigator(
           // The key in necessary for two reasons:
           // 1 - For the framework to understand that we're replacing the
-          // navigator even though it's type and location in the tree is
+          // navigator even though its type and location in the tree is
           // the same. For this isolate purpose a simple ValueKey would fit.
           // 2 - Being able to access the Navigator's state inside the onWillPop
-          // callback and for emptying it's stack when a tab is re-selected.
+          // callback and for emptying its stack when a tab is re-selected.
           // That is why a GlobalKey is needed instead of a simple ValueKey.
           key: currentFlow.navigatorKey,
           // Since this isn't the purpose of this sample, we're not using named
