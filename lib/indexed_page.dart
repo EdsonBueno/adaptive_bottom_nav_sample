@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/// Page that displays it's index, flow's title and color.
+/// Page that displays its index, flow's title and color.
 ///
-/// Has a button for pushing another one of it's kind with an incremented index,
+/// Has a button for pushing another one of its kind with an incremented index,
 ///  and another button for starting a new flow named 'New' with
 /// a random background color.
 class IndexedPage extends StatelessWidget {

@@ -56,7 +56,7 @@ class MaterialBottomNavigationScaffold extends StatelessWidget {
     final barItem = navigationBarItems[tabIndex];
     return Navigator(
       // The key enables us to access the Navigator's state inside the
-      // onWillPop callback and for emptying it's stack when a tab is
+      // onWillPop callback and for emptying its stack when a tab is
       // re-selected. That is why a GlobalKey is needed instead of
       // a simpler ValueKey.
       key: barItem.navigatorKey,
