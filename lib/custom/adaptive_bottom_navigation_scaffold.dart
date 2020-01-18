@@ -52,6 +52,7 @@ class _AdaptiveBottomNavigationScaffoldState
         navigationBarItems: widget.navigationBarItems,
         onItemSelected: onTabSelected,
         initialPageBuilder: widget.initialPageBuilder,
+        selectedIndex: _currentlySelectedIndex,
       );
 
   Widget _buildMaterial(BuildContext context) =>
