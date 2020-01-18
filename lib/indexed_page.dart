@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-/// Page that displays it's index, flow's title and color.
+/// Page that displays its index, flow's title and color.
 ///
-/// Has a button for pushing another one of it's kind with an incremented index,
+/// Has a button for pushing another one of its kind with an incremented index,
 /// and another button for starting a new flow named 'New' with
 /// a random background color.
 class IndexedPage extends StatelessWidget {
@@ -77,7 +77,7 @@ class IndexedPage extends StatelessWidget {
         builder: (context) => IndexedPage(
           // If it's a new flow, the displayed index should be 1 again.
           index: isHorizontalNavigation ? index + 1 : 1,
-          // If it's a new flow, we'll randomize it's color.
+          // If it's a new flow, we'll randomize its color.
           backgroundColor: isHorizontalNavigation
               ? backgroundColor
               : Colors.primaries[Random().nextInt(Colors.primaries.length)],

@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // We're preventing the root navigator from popping and closing the app
     // when the back button is pressed and the inner navigator can handle it.
-    // That occurs when the inner has more than one page on it's stack.
+    // That occurs when the inner has more than one page on its stack.
     // You can comment the onWillPop callback and watch "the bug".
     return WillPopScope(
       onWillPop: () async =>
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // readability of our guide.
   Widget _buildIndexedPageFlow(AppFlow appFlow) => Navigator(
         // The key enables us to access the Navigator's state inside the
-        // onWillPop callback and for emptying it's stack when a tab is
+        // onWillPop callback and for emptying its stack when a tab is
         // re-selected. That is why a GlobalKey is needed instead of
         // a simpler ValueKey.
         key: appFlow.navigatorKey,
