@@ -67,7 +67,7 @@ class IndexedPage extends StatelessWidget {
     BuildContext context,
     bool isHorizontalNavigation,
   ) {
-    // If it's not a horizontal navigation,
+    // If it's not horizontal navigation,
     // we should use the rootNavigator.
     Navigator.of(
       context,
