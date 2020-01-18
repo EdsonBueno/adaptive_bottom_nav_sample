@@ -64,7 +64,7 @@ class IndexedPage extends StatelessWidget {
   }
 
   void _pushPage(BuildContext context, bool isHorizontalNavigation) {
-    // If it's not a horizontal navigation,
+    // If it's not horizontal navigation,
     // we should use the rootNavigator.
     Navigator.of(context, rootNavigator: !isHorizontalNavigation).push(
       MaterialPageRoute(
