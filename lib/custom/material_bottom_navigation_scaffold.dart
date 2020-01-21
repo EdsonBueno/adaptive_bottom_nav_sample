@@ -37,15 +37,20 @@ class _MaterialBottomNavigationScaffoldState
     with TickerProviderStateMixin<MaterialBottomNavigationScaffold> {
   final List<_MaterialBottomNavigationTab> materialNavigationBarItems = [];
   final List<AnimationController> _animationControllers = [];
-  final List<bool> shouldBuildTab = <bool>[];
+
+  /// Controls which tabs should have its content built. This enables us to
+  /// lazy instantiate it.
+  final List<bool> _shouldBuildTab = <bool>[];
 
   @override
   void initState() {
     _initAnimationControllers();
     _initMaterialNavigationBarItems();
 
-    shouldBuildTab
-        .addAll(List<bool>.filled(widget.navigationBarItems.length, false));
+    _shouldBuildTab.addAll(List<bool>.filled(
+      widget.navigationBarItems.length,
+      false,
+    ));
 
     super.initState();
   }
@@ -88,9 +93,8 @@ class _MaterialBottomNavigationScaffoldState
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        // The IndexedStack is what allows us to retain state across tab
-        // switches by keeping our views in the widget tree while only showing
-        // the selected one.
+        // The Stack is what allows us to retain state across tab
+        // switches by keeping all of our views in the widget tree.
         body: Stack(
           fit: StackFit.expand,
           children: [
@@ -108,7 +112,7 @@ class _MaterialBottomNavigationScaffoldState
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: widget.selectedIndex,
-          items: widget.navigationBarItems
+          items: materialNavigationBarItems
               .map(
                 (item) => item.bottomNavigationBarItem,
               )
@@ -126,7 +130,11 @@ class _MaterialBottomNavigationScaffoldState
     _MaterialBottomNavigationTab item,
   ) {
     final isCurrentlySelected = tabIndex == widget.selectedIndex;
-    shouldBuildTab[tabIndex] = isCurrentlySelected || shouldBuildTab[tabIndex];
+
+    // We should build the tab content only if it was already built or
+    // if it is currently selected.
+    _shouldBuildTab[tabIndex] =
+        isCurrentlySelected || _shouldBuildTab[tabIndex];
 
     final Widget view = FadeTransition(
       opacity: _animationControllers[tabIndex].drive(
@@ -134,7 +142,7 @@ class _MaterialBottomNavigationScaffoldState
       ),
       child: KeyedSubtree(
         key: item.subtreeKey,
-        child: shouldBuildTab[tabIndex]
+        child: _shouldBuildTab[tabIndex]
             ? Navigator(
                 // The key enables us to access the Navigator's state inside the
                 // onWillPop callback and for emptying its stack when a tab is
@@ -166,7 +174,7 @@ class _MaterialBottomNavigationScaffoldState
   }
 }
 
-/// Extension of BottomNavigationTab that adds another GlobalKey to it
+/// Extension class of BottomNavigationTab that adds another GlobalKey to it
 /// in order to use it within the KeyedSubtree widget.
 class _MaterialBottomNavigationTab extends BottomNavigationTab {
   const _MaterialBottomNavigationTab({
