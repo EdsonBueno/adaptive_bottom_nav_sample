@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           // That is why a GlobalKey is needed instead of a simple ValueKey.
           key: currentFlow.navigatorKey,
           // Since this isn't the purpose of this sample, we're not using named
-          // routes, because of that the onGenerateRoute callback will be
+          // routes. Because of that, the onGenerateRoute callback will be
           // called only for the initial route.
           onGenerateRoute: (settings) => MaterialPageRoute(
             settings: settings,
