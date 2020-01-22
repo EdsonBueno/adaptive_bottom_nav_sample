@@ -150,7 +150,7 @@ class _MaterialBottomNavigationScaffoldState
                 // a simpler ValueKey.
                 key: item.navigatorKey,
                 // Since this isn't the purpose of this sample, we're not using
-                // named routes, because of that the onGenerateRoute callback
+                // named routes. Because of that, the onGenerateRoute callback
                 // will be called only for the initial route.
                 onGenerateRoute: (settings) => MaterialPageRoute(
                   settings: settings,
