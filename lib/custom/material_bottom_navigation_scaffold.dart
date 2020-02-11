@@ -9,22 +9,18 @@ class MaterialBottomNavigationScaffold extends StatefulWidget {
     @required this.navigationBarItems,
     @required this.onItemSelected,
     @required this.selectedIndex,
-    @required this.initialPageBuilder,
     Key key,
   })  : assert(navigationBarItems != null),
         assert(onItemSelected != null),
         assert(selectedIndex != null),
-        assert(initialPageBuilder != null),
         super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
   final List<BottomNavigationTab> navigationBarItems;
 
   /// Called when a tab selection occurs.
-  final void Function(int value) onItemSelected;
+  final ValueChanged<int> onItemSelected;
 
-  /// Builds the initial page's widget for the given tab index.
-  final Widget Function(int value) initialPageBuilder;
   final int selectedIndex;
 
   @override
@@ -58,11 +54,14 @@ class _MaterialBottomNavigationScaffoldState
   void _initMaterialNavigationBarItems() {
     materialNavigationBarItems.addAll(
       widget.navigationBarItems
-          .map((barItem) => _MaterialBottomNavigationTab(
-                bottomNavigationBarItem: barItem.bottomNavigationBarItem,
-                navigatorKey: barItem.navigatorKey,
-                subtreeKey: GlobalKey(),
-              ))
+          .map(
+            (barItem) => _MaterialBottomNavigationTab(
+              bottomNavigationBarItem: barItem.bottomNavigationBarItem,
+              navigatorKey: barItem.navigatorKey,
+              subtreeKey: GlobalKey(),
+              initialPageBuilder: barItem.initialPageBuilder,
+            ),
+          )
           .toList(),
     );
   }
@@ -97,18 +96,15 @@ class _MaterialBottomNavigationScaffoldState
         // switches by keeping all of our views in the widget tree.
         body: Stack(
           fit: StackFit.expand,
-          children: [
-            _buildPageFlow(
-              context,
-              0,
-              materialNavigationBarItems[0],
-            ),
-            _buildPageFlow(
-              context,
-              1,
-              materialNavigationBarItems[1],
-            ),
-          ],
+          children: materialNavigationBarItems
+              .map(
+                (barItem) => _buildPageFlow(
+                  context,
+                  materialNavigationBarItems.indexOf(barItem),
+                  barItem,
+                ),
+              )
+              .toList(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: widget.selectedIndex,
@@ -154,7 +150,7 @@ class _MaterialBottomNavigationScaffoldState
                 // will be called only for the initial route.
                 onGenerateRoute: (settings) => MaterialPageRoute(
                   settings: settings,
-                  builder: (context) => widget.initialPageBuilder(tabIndex),
+                  builder: item.initialPageBuilder,
                 ),
               )
             : Container(),
@@ -180,13 +176,16 @@ class _MaterialBottomNavigationTab extends BottomNavigationTab {
   const _MaterialBottomNavigationTab({
     @required BottomNavigationBarItem bottomNavigationBarItem,
     @required GlobalKey<NavigatorState> navigatorKey,
+    @required WidgetBuilder initialPageBuilder,
     @required this.subtreeKey,
   })  : assert(bottomNavigationBarItem != null),
         assert(subtreeKey != null),
+        assert(initialPageBuilder != null),
         assert(navigatorKey != null),
         super(
           bottomNavigationBarItem: bottomNavigationBarItem,
           navigatorKey: navigatorKey,
+          initialPageBuilder: initialPageBuilder,
         );
 
   final GlobalKey subtreeKey;

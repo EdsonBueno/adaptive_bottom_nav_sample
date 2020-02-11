@@ -10,17 +10,12 @@ import 'package:flutter/widgets.dart';
 class AdaptiveBottomNavigationScaffold extends StatefulWidget {
   const AdaptiveBottomNavigationScaffold({
     @required this.navigationBarItems,
-    @required this.initialPageBuilder,
     Key key,
   })  : assert(navigationBarItems != null),
-        assert(initialPageBuilder != null),
         super(key: key);
 
   /// List of the tabs to be displayed with their respective navigator's keys.
   final List<BottomNavigationTab> navigationBarItems;
-
-  /// Builds the initial page's widget for the given tab index.
-  final Widget Function(int value) initialPageBuilder;
 
   @override
   _AdaptiveBottomNavigationScaffoldState createState() =>
@@ -51,7 +46,6 @@ class _AdaptiveBottomNavigationScaffoldState
       CupertinoBottomNavigationScaffold(
         navigationBarItems: widget.navigationBarItems,
         onItemSelected: onTabSelected,
-        initialPageBuilder: widget.initialPageBuilder,
         selectedIndex: _currentlySelectedIndex,
       );
 
@@ -59,7 +53,6 @@ class _AdaptiveBottomNavigationScaffoldState
       MaterialBottomNavigationScaffold(
         navigationBarItems: widget.navigationBarItems,
         onItemSelected: onTabSelected,
-        initialPageBuilder: widget.initialPageBuilder,
         selectedIndex: _currentlySelectedIndex,
       );
 
