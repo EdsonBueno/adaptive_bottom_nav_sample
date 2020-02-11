@@ -44,10 +44,11 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         body: IndexedStack(
           index: _currentBarIndex,
-          children: [
-            _buildIndexedPageFlow(appFlows[0]),
-            _buildIndexedPageFlow(appFlows[1]),
-          ],
+          children: appFlows
+              .map(
+                _buildIndexedPageFlow,
+              )
+              .toList(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentBarIndex,
