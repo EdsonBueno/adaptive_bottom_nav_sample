@@ -37,21 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
         navigationBarItems: appFlows
             .map(
               (flow) => BottomNavigationTab(
-                bottomNavigationBarItem: BottomNavigationBarItem(
-                  title: Text(flow.title),
-                  icon: Icon(flow.iconData),
-                ),
-                navigatorKey: flow.navigatorKey,
-              ),
+                  bottomNavigationBarItem: BottomNavigationBarItem(
+                    title: Text(flow.title),
+                    icon: Icon(flow.iconData),
+                  ),
+                  navigatorKey: flow.navigatorKey,
+                  initialPageBuilder: (context) => IndexedPage(
+                        index: 1,
+                        backgroundColor: flow.mainColor,
+                        containingFlowTitle: flow.title,
+                      )),
             )
             .toList(),
-        initialPageBuilder: (flowIndex) {
-          final appFlow = appFlows[flowIndex];
-          return IndexedPage(
-            index: 1,
-            backgroundColor: appFlow.mainColor,
-            containingFlowTitle: appFlow.title,
-          );
-        },
       );
 }

@@ -7,12 +7,10 @@ class CupertinoBottomNavigationScaffold extends StatelessWidget {
   const CupertinoBottomNavigationScaffold({
     @required this.navigationBarItems,
     @required this.onItemSelected,
-    @required this.initialPageBuilder,
     @required this.selectedIndex,
     Key key,
   })  : assert(navigationBarItems != null),
         assert(onItemSelected != null),
-        assert(initialPageBuilder != null),
         assert(selectedIndex != null),
         super(key: key);
 
@@ -20,10 +18,8 @@ class CupertinoBottomNavigationScaffold extends StatelessWidget {
   final List<BottomNavigationTab> navigationBarItems;
 
   /// Called when a tab selection occurs.
-  final void Function(int value) onItemSelected;
+  final ValueChanged<int> onItemSelected;
 
-  /// Builds the initial page's widget for the given tab index.
-  final Widget Function(int value) initialPageBuilder;
   final int selectedIndex;
 
   @override
@@ -40,12 +36,15 @@ class CupertinoBottomNavigationScaffold extends StatelessWidget {
               .toList(),
           onTap: onItemSelected,
         ),
-        tabBuilder: (context, index) => CupertinoTabView(
-          navigatorKey: navigationBarItems[index].navigatorKey,
-          onGenerateRoute: (settings) => CupertinoPageRoute(
-            settings: settings,
-            builder: (context) => initialPageBuilder(index),
-          ),
-        ),
+        tabBuilder: (context, index) {
+          final barItem = navigationBarItems[index];
+          return CupertinoTabView(
+            navigatorKey: barItem.navigatorKey,
+            onGenerateRoute: (settings) => CupertinoPageRoute(
+              settings: settings,
+              builder: barItem.initialPageBuilder,
+            ),
+          );
+        },
       );
 }
