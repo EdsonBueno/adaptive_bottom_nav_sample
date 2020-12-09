@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           items: appFlows
               .map(
                 (flow) => BottomNavigationBarItem(
-                  title: Text(flow.title),
+                  label: flow.title,
                   icon: Icon(flow.iconData),
                 ),
               )
