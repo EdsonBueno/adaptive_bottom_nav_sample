@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             .map(
               (flow) => BottomNavigationTab(
                   bottomNavigationBarItem: BottomNavigationBarItem(
-                    title: Text(flow.title),
+                    label: flow.title,
                     icon: Icon(flow.iconData),
                   ),
                   navigatorKey: flow.navigatorKey,
